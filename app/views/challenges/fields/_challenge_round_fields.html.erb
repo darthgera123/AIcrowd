@@ -1,10 +1,6 @@
 <div class="form-group">
-  <%= f.check_box :active,
-  { class: 'switch active-switch' },
-  "true", "false"  %>
-  <%= f.label :active,
-  'Current Round',
-  data: { on: 'true', off: 'false' } %>
+  <%= f.check_box :active, { class: 'switch active-switch' }, "true", "false" %>
+  <%= f.label :active, 'Current Round', data: { on: 'true', off: 'false' } %>
 </div>
 
 <div class="form-group">
@@ -77,18 +73,18 @@
 </div>
 
 <label>Leaderboard Message</label>
-<%= markdown_editor do |m| %>
-<%= f.text_area :leaderboard_note_markdown, class: "form-control" %>
+  <%= markdown_editor do |m| %>
+  <%= f.text_area :leaderboard_note_markdown, class: "form-control" %>
 <% end %>
 
-<% if current_participant.admin? && f.object.persisted?%>
-round_id: <%= f.object.id %>
+<% if current_participant.admin? && f.object.persisted? %>
+  <span>round_id: <%= f.object.id %></span>
 <% end %>
 
 <% if f.object.persisted? && @challenge.submissions.where(challenge_round_id: f.object.id).present? %>
-<span class='pull-right'>
-  <%= pluralize(@challenge.submissions.count,'submission') %>
-</span>
+  <span class='pull-right'>
+    <%= pluralize(@challenge.submissions.count,'submission') %>
+  </span>
 <% else %>
-<%= link_to_remove_association "remove", f, class: 'pull-right' %>
+  <%= link_to_remove_association "remove", f, class: 'pull-right' %>
 <% end %>

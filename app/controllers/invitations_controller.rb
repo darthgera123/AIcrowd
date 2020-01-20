@@ -3,6 +3,7 @@ class InvitationsController < ApplicationController
 
   def import
     InvitationImporter.new(file: params[:file], challenge_id: @challenge.id).call
+    # TODO: Consider changing this URL to challenge edit page
     redirect_to challenge_path(@challenge)
   end
 

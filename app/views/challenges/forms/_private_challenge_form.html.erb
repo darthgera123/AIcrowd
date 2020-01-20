@@ -1,12 +1,11 @@
-<%= form_for [@organizer,@challenge], validate: true do |f| %>
+<%= form_for @challenge, url: private_challenge_challenge_edit_forms_path(@challenge), method: :patch do |f| %>
 	<div class="form-group">
 		<%= f.check_box :private_challenge, {}, "true", "false" %>
 		<%= f.label :private_challenge, 'Private challenge' %>
 	</div>
 
-	<%= render partial: 'challenges/form/invitations_table', locals: { challenge: @challenge, f: f } %>
-	<%= render partial: 'challenges/form/submit_buttons', locals: { f: f } %>
-
+	<%= render partial: 'challenges/fields/invitations_table_fields', locals: { challenge: @challenge, f: f } %>
+	<%= render partial: 'challenges/fields/submit_buttons', locals: { f: f } %>
 <% end %>
 
 <% if @challenge.persisted? %>

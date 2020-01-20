@@ -1,0 +1,43 @@
+<div class="section-p-md">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class='tab-content'>
+          <div id='tab-details' class="tab-pane fade show active">
+            <%= render partial: 'challenges/forms/details_form', locals: { challenge: challenge } %>
+          </div>
+
+          <div id='tab-rules' class="tab-pane fade">
+            <%= render partial: 'challenges/forms/rules_form', locals: { challenge: challenge } %>
+          </div>
+
+          <div id='tab-type' class="tab-pane fade">
+            <%= render partial: 'challenges/forms/rounds_form', locals: { challenge: challenge } %>
+          </div>
+
+          <div id='tab-overview' class="tab-pane fade">
+            <%= render partial: 'challenges/forms/overview_form', locals: { challenge: challenge } %>
+          </div>
+
+          <div id='tab-private' class="tab-pane fade">
+            <%= render partial: 'challenges/forms/private_challenge_form', locals: { challenge: challenge } %>
+          </div>
+
+          <div id='tab-submissions' class="tab-pane fade">
+            <%= render partial: 'challenges/forms/submissions_form', locals: { challenge: challenge } %>
+          </div>
+
+          <div id='tab-winner' class="tab-pane fade">
+            <%= render partial: 'challenges/forms/winner_form', locals: { challenge: challenge } %>
+          </div>
+
+          <% if current_participant.admin? %>
+            <div id='tab-dynamic' class="tab-pane fade">
+              <%= render partial: 'challenges/forms/admin_form', locals: { challenge: challenge } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

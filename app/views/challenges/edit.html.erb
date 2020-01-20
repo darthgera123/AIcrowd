@@ -1,3 +1,32 @@
-<%= render partial: 'challenges/form/form', locals: {
-      challenge: @challenge,
-      title: 'Edit Challenge'} %>
+<div class="masthead">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <% if @challenge.persisted? %>
+          <h4><%= @challenge.challenge %></h4>
+        <% end %>
+        <h1>Edit challenge</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sub-nav-bar sticky-top">
+  <div class="container-fluid">
+    <ul class='nav'>
+      <li class="nav-item"><a class="nav-link active" data-toggle='tab' href="#tab-details" onclick="return false;">Details</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle='tab' href="#tab-overview" onclick="return false;">Overview</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle='tab' href="#tab-type" onclick="return false;">Rounds</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle='tab' href="#tab-private" onclick="return false;">Private Challenge</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle='tab' href="#tab-submissions" onclick="return false;">Submissions</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle='tab' href="#tab-winner" onclick="return false;">Winner</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle='tab' href="#tab-rules" onclick="return false;">Rules</a></li>
+      <% if current_participant.admin? %>
+        <li class="nav-item"><a class="nav-link" data-toggle='tab' href="#tab-dynamic" onclick="return false;">Admin</a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
+<%= render partial: 'challenges/forms', locals: { challenge: @challenge } %>

@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :participants, controllers: { omniauth_callbacks: 'participants/omniauth_callbacks' }
+
   resources :participants, only: [:show, :edit, :update, :destroy, :index] do
     get :sync_mailchimp
     get :regen_api_key
@@ -143,7 +144,23 @@ Rails.application.routes.draw do
     resources :participation_terms, only: [:show, :create, :index]
     resources :challenge_rules, only: [:show]
     resources :challenge_participants
+
+
   end
+  # TODO: Move all above challenge routes into Challenges module
+  resources :challenges, module: :challenges, only: [] do
+    resource :edit_forms, only: [] do
+      patch :details
+      patch :overview
+      patch :rounds
+      patch :private_challenge
+      patch :submissions
+      patch :winner
+      patch :rules
+      patch :admin
+    end
+  end
+
   get '/load_more_challenges', to: 'challenges#load_more', as: :load_more_challenges
 
   resources :dataset_files, only: [] do

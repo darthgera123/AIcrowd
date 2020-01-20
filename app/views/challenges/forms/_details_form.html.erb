@@ -1,5 +1,4 @@
-<%= form_for [@organizer, @challenge],
-             html: {class: "form-rg"} do |f| %>
+<%= form_for @challenge, url: details_challenge_edit_forms_path(@challenge), method: :patch, html: { class: "form-rg" } do |f| %>
   <% @challenge.errors.full_messages.each do |error| %>
     <p><%= error %></p>
   <% end %>
@@ -188,13 +187,11 @@
     </div>
   </div>
 
-
   <div class="form-row">
     <div class="form-group col-12">
       <label for="otherScoresFieldnames">Fieldnames for other scores <br/> (comma seperated, max 5 fields)</label>
       <%= f.text_field :other_scores_fieldnames, class: "form-control" %>
     </div>
-
   </div>
 
   <%= f.hidden_field :organizer_id %>
@@ -204,6 +201,5 @@
     <%= f.text_field :discourse_category_id, class: "form-control" %>
   </div>
 
-  <%= render partial: 'challenges/form/submit_buttons',
-             locals: {f: f} %>
+  <%= render partial: 'challenges/fields/submit_buttons', locals: { f: f } %>
 <% end %>
