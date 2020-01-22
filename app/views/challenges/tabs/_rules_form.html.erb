@@ -1,4 +1,4 @@
-<%= form_for @challenge, url: rules_challenge_edit_forms_path(@challenge), html: { class: "form-rg", multipart: true } do |f| %>
+<div class="challenges-form__thin-tab">
   <span class="label-text">Rules</span>
 
   <% if @challenge.current_challenge_rules.present? %>
@@ -15,4 +15,4 @@
                                 id: 'replace-rules-button' } %>
   </div>
   <%= render partial: 'challenges/fields/submit_buttons', locals: { f: f } %>
-<% end %>
+</div>

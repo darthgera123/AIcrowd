@@ -2,9 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <% if @challenge.persisted? %>
-          <h4><%= @challenge.challenge %></h4>
-        <% end %>
+        <h4><%= @challenge.challenge %></h4>
         <h1>Edit challenge</h1>
       </div>
     </div>
@@ -12,4 +10,4 @@
 </div>
 
 <%= render partial: 'challenges/navigation', locals: { challenge: @challenge } %>
-<%= render partial: 'challenges/forms', locals: { challenge: @challenge } %>
+<%= render partial: 'challenges/form', locals: { challenge: @challenge } %>

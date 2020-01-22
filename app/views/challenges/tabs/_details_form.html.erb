@@ -1,13 +1,4 @@
-<%
-  form_url    = challenge.persisted? ? details_challenge_edit_forms_path(challenge) : challenges_path
-  form_method = challenge.persisted? ? :patch : :post
-%>
-
-<%= form_for @challenge, url: form_url, method: form_method, html: { class: "form-rg" } do |f| %>
-  <% challenge.errors.full_messages.each do |error| %>
-    <p><%= error %></p>
-  <% end %>
-
+<div class="challenges-form__thin-tab">
   <div class="form-group">
     <span class="label-text">Challenge Title</span>
     <%= f.text_field :challenge, class: "form-control" %>
@@ -188,7 +179,7 @@
 
     <div class="form-group col-6">
       <label for="secondaryScoreTitleSortOrder">Sort order</label>
-      <%= f.select :secondary_sort_order, enum_option_pairs(Challenge, :secondary_sort_order), { selected: :ascending }, {class: "form-control", required: true} %>
+      <%= f.select :secondary_sort_order, enum_option_pairs(Challenge, :secondary_sort_order), {}, {class: "form-control", required: true} %>
     </div>
   </div>
 
@@ -207,4 +198,4 @@
   </div>
 
   <%= render partial: 'challenges/fields/submit_buttons', locals: { f: f } %>
-<% end %>
+</div>

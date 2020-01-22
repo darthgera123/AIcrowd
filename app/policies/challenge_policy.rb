@@ -28,7 +28,7 @@ class ChallengePolicy < ApplicationPolicy
   end
 
   def create?
-    edit?
+    new?
   end
 
   def destroy?

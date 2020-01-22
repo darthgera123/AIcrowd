@@ -50,13 +50,22 @@ class ChallengesController < ApplicationController
     authorize @challenge
 
     if @challenge.save
-      redirect_to edit_challenge_path(@challenge), notice: 'Challenge created.'
+      redirect_to edit_challenge_path(@challenge, step: :overview), notice: 'Challenge created.'
     else
       render :new
     end
   end
 
   def edit; end
+
+  def update
+    binding.pry if params[:step].present?
+    if @challenge.update(challenge_params)
+      redirect_to edit_challenge_path(@challenge, step: params[:step]), notice: 'Challenge updated.'
+    else
+      render :edit
+    end
+  end
 
   def reorder
     authorize Challenge
@@ -77,13 +86,6 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.friendly.find(params[:challenge_id])
     authorize @challenge
     @clef_task = @challenge.clef_task
-  end
-
-  def regrade
-    challenge = Challenge.friendly.find(params[:challenge_id])
-    authorize challenge
-    @submission_count = challenge.submissions_count
-    render 'challenges/form/regrade_status'
   end
 
   def remove_image
@@ -119,7 +121,6 @@ class ChallengesController < ApplicationController
 
   def challenge_params
     params.require(:challenge).permit(
-      :id,
       :challenge,
       :tagline,
       :require_registration,
@@ -147,9 +148,63 @@ class ChallengesController < ApplicationController
       :organizer_id,
       :discourse_category_id,
       :other_scores_fieldnames,
-      image_attributes: [ # These may not be needed
+      :description_markdown,
+      :prize_cash,
+      :prize_travel,
+      :prize_academic,
+      :prize_misc,
+      :private_challenge,
+      :clef_task_id,
+      :online_submissions,
+      :post_challenge_submissions,
+      :submission_instructions_markdown,
+      :license_markdown,
+      :winners_tab_active,
+      :winner_description_markdown,
+      :submissions_downloadable,
+      :dynamic_content_flag,
+      :dynamic_content_tab,
+      :dynamic_content,
+      :dynamic_content_url,
+      image_attributes: [
         :id,
         :image,
+        :_destroy
+      ],
+      challenge_partners_attributes: [
+        :id,
+        :image_file,
+        :partner_url,
+        :_destroy
+      ],
+      challenge_rounds_attributes: [
+        :id,
+        :challenge_round,
+        :minimum_score,
+        :minimum_score_secondary,
+        :submission_limit,
+        :submission_limit_period,
+        :failed_submissions,
+        :parallel_submissions,
+        :ranking_highlight,
+        :ranking_window,
+        :score_precision,
+        :score_secondary_precision,
+        :start_dttm,
+        :end_dttm,
+        :active,
+        :leaderboard_note_markdown,
+        :_destroy
+      ],
+      challenge_rules_attributes: [
+        :id,
+        :terms_markdown,
+        :has_additional_checkbox,
+        :additional_checkbox_text_markdown
+      ],
+      invitations_attributes: [
+        :id,
+        :email,
         :_destroy
       ]
     )

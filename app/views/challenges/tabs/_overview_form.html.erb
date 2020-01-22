@@ -1,4 +1,4 @@
-<%= form_for @challenge, url: overview_challenge_edit_forms_path(@challenge), method: :patch, html: { class: "form-rg" } do |f| %>
+<div class="challenges-form__thin-tab">
   <div class="form-group">
     <span class="label-text">Overview</span>
     <%= markdown_editor do |m| %>
@@ -9,18 +9,22 @@
   <div class="form-group">
     <span class="label-text">Prizes Breakdown</span>
   </div>
+
   <div class="form-group">
     <span class="label-text">Prize Money</span>
     <%= f.text_field :prize_cash , class: "form-control" %>
   </div>
+
   <div class="form-group">
     <span class="label-text">Travel Grants</span>
     <%= f.text_field :prize_travel , class: "form-control" %>
   </div>
+
   <div class="form-group">
     <span class="label-text">Authorship/Co-Authorship</span>
     <%= f.text_field :prize_academic , class: "form-control" %>
   </div>
+
   <div class="form-group">
     <span class="label-text">Misc Prizes</span>
     <%= f.text_field :prize_misc , class: "form-control" %>
@@ -33,11 +37,11 @@
         <%= render 'challenges/fields/challenge_partner_fields', f: partner %>
       <% end %>
       <div class='links'>
-        <%= link_to_add_association '+ Partner Logo', f, :challenge_partners,
-        html_options = { partial: 'challenges/fields/challenge_partner_fields' } %>
+        <%= link_to_add_association '+ Partner Logo', f, :challenge_partners, html_options = { partial: 'challenges/fields/challenge_partner_fields' } %>
       </div>
     </div>
     <br/><br/>
   </fieldset>
+
   <%= render partial: 'challenges/fields/submit_buttons', locals: { f: f } %>
-<% end %>
+</div>

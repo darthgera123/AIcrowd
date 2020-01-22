@@ -108,7 +108,8 @@ Rails.application.routes.draw do
 
   resources :participation_terms, only: [:index]
 
-  resources :challenges, only: [:index, :show, :new, :create, :edit] do
+  # TODO: Move below challenge routes into Challenges module
+  resources :challenges, only: [:index, :show, :new, :create, :edit, :update] do
     collection do
       get :reorder
       post :assign_order
@@ -131,7 +132,6 @@ Rails.application.routes.draw do
       get :submission_detail
     end
     resources :topics, except: [:show]
-    get :regrade
     get :remove_image
     get :clef_task
     resources :votes, only: [:create, :destroy]
@@ -143,19 +143,6 @@ Rails.application.routes.draw do
     resources :participation_terms, only: [:show, :create, :index]
     resources :challenge_rules, only: [:show]
     resources :challenge_participants
-  end
-  # TODO: Move all above challenge routes into Challenges module
-  resources :challenges, module: :challenges, only: [] do
-    resource :edit_forms, only: [] do
-      patch :details
-      patch :overview
-      patch :rounds
-      patch :private_challenge
-      patch :submissions
-      patch :winner
-      patch :rules
-      patch :admin
-    end
   end
 
   get '/load_more_challenges', to: 'challenges#load_more', as: :load_more_challenges

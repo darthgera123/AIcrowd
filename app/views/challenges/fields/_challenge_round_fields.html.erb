@@ -15,8 +15,8 @@
 
 <div class="form-group">
   <% unless @challenge.secondary_sort_order == :not_used %>
-  <label>Prior Round Min Sec Score</label>
-  <%= f.text_field :minimum_score_secondary, class: "form-control", placeholder: 'No limitations' %>
+    <label>Prior Round Min Sec Score</label>
+    <%= f.text_field :minimum_score_secondary, class: "form-control", placeholder: 'No limitations' %>
   <% end %>
 </div>
 
@@ -62,18 +62,17 @@
 
 <div class="form-group">
   <%= f.label :start_dttm, 'Round Start (UTC)' %>
-  <%= f.text_field :start_dttm, class: "form-control",
-  data: { controller: 'flatpickr' } %>
+  <%= f.text_field :start_dttm, class: "form-control", data: { controller: 'flatpickr' } %>
 </div>
 
 <div class="form-group">
   <%= f.label :end_dttm, 'Round End (UTC)' %>
-  <%= f.text_field :end_dttm, class: "form-control",
-  data: { controller: 'flatpickr' } %>
+  <%= f.text_field :end_dttm, class: "form-control", data: { controller: 'flatpickr' } %>
 </div>
 
 <label>Leaderboard Message</label>
-  <%= markdown_editor do |m| %>
+
+<%= markdown_editor do |m| %>
   <%= f.text_area :leaderboard_note_markdown, class: "form-control" %>
 <% end %>
 
