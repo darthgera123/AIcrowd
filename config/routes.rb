@@ -76,7 +76,6 @@ Rails.application.routes.draw do
 
   resources :organizer_applications, only: [:create]
   resources :organizers, except: [:new, :index] do
-    resources :challenges
     get :remove_image
     get :regen_api_key
     get :clef_email
@@ -109,7 +108,7 @@ Rails.application.routes.draw do
 
   resources :participation_terms, only: [:index]
 
-  resources :challenges, only: [:index, :show] do
+  resources :challenges, only: [:index, :show, :new, :create, :edit] do
     collection do
       get :reorder
       post :assign_order
@@ -144,8 +143,6 @@ Rails.application.routes.draw do
     resources :participation_terms, only: [:show, :create, :index]
     resources :challenge_rules, only: [:show]
     resources :challenge_participants
-
-
   end
   # TODO: Move all above challenge routes into Challenges module
   resources :challenges, module: :challenges, only: [] do

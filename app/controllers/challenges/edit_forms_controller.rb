@@ -4,9 +4,11 @@ module Challenges
     before_action :load_organizer
     before_action :authorize_challenge
 
+    SUCCESS_MESSAGE = 'Challenge updated.'.freeze
+
     def details
       if @challenge.update(details_params)
-        redirect_to edit_organizer_challenge_path(@organizer, @challenge, step: :details), notice: 'Challenge updated.'
+        redirect_to edit_challenge_path(@challenge, step: :details), notice: SUCCESS_MESSAGE
       else
         render 'challenges/edit', step: :details
       end
@@ -14,7 +16,7 @@ module Challenges
 
     def overview
       if @challenge.update(overview_params)
-        redirect_to edit_organizer_challenge_path(@organizer, @challenge, step: :overview), notice: 'Challenge updated.'
+        redirect_to edit_challenge_path(@challenge, step: :overview), notice: SUCCESS_MESSAGE
       else
         render 'challenges/edit', step: :overview
       end
@@ -22,7 +24,7 @@ module Challenges
 
     def rounds
       if @challenge.update(rounds_params)
-        redirect_to edit_organizer_challenge_path(@organizer, @challenge, step: :rounds), notice: 'Challenge updated.'
+        redirect_to edit_challenge_path(@challenge, step: :rounds), notice: SUCCESS_MESSAGE
       else
         render 'challenges/edit', step: :rounds
       end
@@ -30,7 +32,7 @@ module Challenges
 
     def private_challenge
       if @challenge.update(private_challenge_params)
-        redirect_to edit_organizer_challenge_path(@organizer, @challenge, step: :private_challenge), notice: 'Challenge updated.'
+        redirect_to edit_challenge_path(@challenge, step: :private_challenge), notice: SUCCESS_MESSAGE
       else
         render 'challenges/edit', step: :private_challenge
       end
@@ -38,7 +40,7 @@ module Challenges
 
     def submissions
       if @challenge.update(submissions_params)
-        redirect_to edit_organizer_challenge_path(@organizer, @challenge, step: :submissions), notice: 'Challenge updated.'
+        redirect_to edit_challenge_path(@challenge, step: :submissions), notice: SUCCESS_MESSAGE
       else
         render 'challenges/edit', step: :submissions
       end
@@ -46,7 +48,7 @@ module Challenges
 
     def winner
       if @challenge.update(winner_params)
-        redirect_to edit_organizer_challenge_path(@organizer, @challenge, step: :winner), notice: 'Challenge updated.'
+        redirect_to edit_challenge_path(@challenge, step: :winner), notice: SUCCESS_MESSAGE
       else
         render 'challenges/edit', step: :winner
       end
@@ -54,7 +56,7 @@ module Challenges
 
     def rules
       if @challenge.update(rules_params)
-        redirect_to edit_organizer_challenge_path(@organizer, @challenge, step: :rules), notice: 'Challenge updated.'
+        redirect_to edit_challenge_path(@challenge, step: :rules), notice: SUCCESS_MESSAGE
       else
         render 'challenges/edit', step: :rules
       end
@@ -62,7 +64,7 @@ module Challenges
 
     def admin
       if @challenge.update(admin_params)
-        redirect_to edit_organizer_challenge_path(@organizer, @challenge, step: :admin), notice: 'Challenge updated.'
+        redirect_to edit_challenge_path(@challenge, step: :admin), notice: SUCCESS_MESSAGE
       else
         render 'challenges/edit', step: :admin
       end
@@ -79,7 +81,7 @@ module Challenges
     end
 
     def authorize_challenge
-      authorize @challenge
+      # authorize @challenge
     end
 
     def details_params
