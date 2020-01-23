@@ -2,12 +2,10 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <%= form_with model: @challenge, class: 'form-rg challenges-form', multipart: true, local: true do |f| %>
-          <% @challenge.errors.full_messages.each do |error| %>
-            <p><%= error %></p>
-          <% end %>
+        <%= form_with model: @challenge, id: 'challenge-form', class: 'form-rg challenges-form', multipart: true, remote: true do |f| %>
+          <p id="challenges-form-errors" class="challenges-form__errors-paragraph"><%= @challenge.errors.full_messages.to_sentence %></p>
 
-          <% hidden_field_tag :step, id: 'challenges-form-step', value: :overview %>
+          <%= f.hidden_field :step, name: :step, id: 'challenges-form-step', value: :overview %>
 
           <div class='tab-content'>
             <div id='tab-details' class="tab-pane fade show active">

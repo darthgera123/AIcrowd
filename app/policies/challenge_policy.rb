@@ -24,11 +24,11 @@ class ChallengePolicy < ApplicationPolicy
   end
 
   def new?
-    edit?
+    participant&.admin?
   end
 
   def create?
-    new?
+    participant&.admin?
   end
 
   def destroy?

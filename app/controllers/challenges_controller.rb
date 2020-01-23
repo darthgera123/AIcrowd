@@ -59,11 +59,11 @@ class ChallengesController < ApplicationController
   def edit; end
 
   def update
-    binding.pry if params[:step].present?
-    if @challenge.update(challenge_params)
-      redirect_to edit_challenge_path(@challenge, step: params[:step]), notice: 'Challenge updated.'
-    else
-      render :edit
+    @challenge.update(challenge_params)
+
+    respond_to do |format|
+      format.html { render :edit }
+      format.js   { render :update }
     end
   end
 

@@ -4,7 +4,6 @@ describe ClefTasksController, type: :controller do
   render_views
 
   let!(:clef_tasks)        { create_list(:clef_task, 3, organizer: organizer) }
-
   let(:organizer)          { create :organizer }
   let(:organizer_admin)    { create :participant, organizer: organizer }
   let(:valid_attributes)   { FactoryBot.attributes_for(:clef_task) }

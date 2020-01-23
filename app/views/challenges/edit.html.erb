@@ -1,13 +1,15 @@
-<div class="masthead">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <h4><%= @challenge.challenge %></h4>
-        <h1>Edit challenge</h1>
+<div data-controller="challenges-edit">
+  <div class="masthead">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <h4><%= @challenge.challenge %></h4>
+          <h1>Edit challenge</h1>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<%= render partial: 'challenges/navigation', locals: { challenge: @challenge } %>
-<%= render partial: 'challenges/form', locals: { challenge: @challenge } %>
+  <%= render partial: 'challenges/navigation', locals: { challenge: @challenge } %>
+  <%= render partial: 'challenges/form', locals: { challenge: @challenge } %>
+</div>

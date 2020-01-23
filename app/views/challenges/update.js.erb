@@ -1,0 +1,30 @@
+function handleChallengeUpdate() {
+  const errorMessage                  = "<%= @challenge.errors.full_messages.to_sentence.html_safe %>";
+  const challengesFormErrorsParagraph = document.getElementById('challenges-form-errors');
+  const flashMessagesWrapper          = document.getElementById('flash-messages-wrapper');
+  const detailFormCardImage           = document.getElementById('challenges-form-card-image');
+  const nextTab                       = "<%= params[:next_tab] %>";
+  const overviewFormPartnerImagesUrls = <%= @challenge.challenge_partners.map { |challenge_partner| asset_url(challenge_partner.image_file&.url) }.to_json.html_safe %>;
+
+  // Refresh Card Image
+  detailFormCardImage.setAttribute('src', '<%= asset_url(@challenge.image_file&.url) %>')
+  // Refresh Partner Images
+  document.querySelectorAll('.challenges-form-partner-image').forEach(function(element, index) {
+    element.setAttribute('src', overviewFormPartnerImagesUrls[index]);
+  })
+
+  if (errorMessage.length) {
+    flashMessagesWrapper.innerHTML = "<%= j render 'layouts/flash_message', type: 'error', message: 'Previous tab couldn\'t be saved because of errors. Please move back and correct the fields.' %>";
+    setTimeout(function() { $('.flash-message').slideUp(500); }, 5000);
+  } else {
+    flashMessagesWrapper.innerHTML = "<%= j render 'layouts/flash_message', type: 'notice', message: 'Challenge saved.' %>";
+    setTimeout(function() { $('.flash-message').slideUp(500); }, 1000);
+  }
+
+  if (nextTab.length) { // Form submitted by Update challenge button
+    window.scrollTo(0, 0);
+    setTimeout(function() { $(`#challenge-edit-${nextTab}-tab`).tab('show'); }, window.pageYOffset / 4);
+  }
+}
+
+handleChallengeUpdate();
