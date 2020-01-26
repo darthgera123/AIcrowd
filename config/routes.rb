@@ -132,7 +132,7 @@ Rails.application.routes.draw do
       get :submission_detail
     end
     resources :topics, except: [:show]
-    get :remove_image
+    get :remove_image, on: :member
     get :clef_task
     resources :votes, only: [:create, :destroy]
     resources :follows, only: [:create, :destroy]

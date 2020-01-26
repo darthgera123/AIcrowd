@@ -1,7 +1,7 @@
 class ChallengesController < ApplicationController
   before_action :authenticate_participant!, except: [:show, :index]
   before_action :terminate_challenge, only: [:show, :index]
-  before_action :set_challenge, only: [:show, :edit, :update, :destroy]
+  before_action :set_challenge, only: [:show, :edit, :update, :destroy, :remove_image]
   after_action :verify_authorized, except: [:index, :show]
   before_action :set_s3_direct_post, only: [:edit, :update]
   before_action :set_organizer, only: [:new, :create, :edit, :update]
@@ -62,8 +62,7 @@ class ChallengesController < ApplicationController
     @challenge.update(challenge_params)
 
     respond_to do |format|
-      format.html { render :edit }
-      format.js   { render :update }
+      format.js { render :update }
     end
   end
 
@@ -89,11 +88,12 @@ class ChallengesController < ApplicationController
   end
 
   def remove_image
-    @challenge = Challenge.friendly.find(params[:challenge_id])
-    authorize @challenge
     @challenge.remove_image_file!
     @challenge.save
-    redirect_to edit_challenge_path(@challenge), notice: 'Image removed.'
+
+    respond_to do |format|
+      format.js { render :remove_image }
+    end
   end
 
   private
