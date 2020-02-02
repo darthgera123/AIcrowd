@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_31_141335) do
+ActiveRecord::Schema.define(version: 2020_02_02_191204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -334,8 +334,6 @@ ActiveRecord::Schema.define(version: 2020_01_31_141335) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "tagline"
-    t.string "primary_sort_order_cd", default: "ascending"
-    t.string "secondary_sort_order_cd", default: "not_used"
     t.boolean "perpetual_challenge", default: false
     t.string "answer_file_s3_key"
     t.integer "page_views", default: 0
@@ -405,8 +403,6 @@ ActiveRecord::Schema.define(version: 2020_01_31_141335) do
     t.integer "team_freeze_seconds_before_end", default: 604800
     t.boolean "hidden_challenge", default: false, null: false
     t.datetime "team_freeze_time"
-    t.string "score_secondary_title"
-    t.string "score_title"
     t.index ["clef_task_id"], name: "index_challenges_on_clef_task_id"
     t.index ["organizer_id"], name: "index_challenges_on_organizer_id"
     t.index ["slug"], name: "index_challenges_on_slug", unique: true
