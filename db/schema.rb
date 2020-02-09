@@ -291,22 +291,22 @@ ActiveRecord::Schema.define(version: 2020_02_10_143323) do
     t.boolean "active", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "submission_limit"
-    t.string "submission_limit_period_cd"
+    t.integer "submission_limit", default: 5
+    t.string "submission_limit_period_cd", default: "day"
     t.datetime "start_dttm"
     t.datetime "end_dttm"
-    t.float "minimum_score"
-    t.float "minimum_score_secondary"
-    t.integer "ranking_window"
-    t.integer "ranking_highlight"
-    t.integer "score_precision"
-    t.integer "score_secondary_precision"
+    t.float "minimum_score", default: 0.0
+    t.float "minimum_score_secondary", default: 0.0
+    t.integer "ranking_window", default: 96
+    t.integer "ranking_highlight", default: 3
+    t.integer "score_precision", default: 3
+    t.integer "score_secondary_precision", default: 3
     t.text "leaderboard_note_markdown"
     t.text "leaderboard_note"
     t.integer "failed_submissions", default: 0
     t.integer "parallel_submissions", default: 0, null: false
-    t.string "score_title", default: "", null: false
-    t.string "score_secondary_title", default: "", null: false
+    t.string "score_title", default: "Score", null: false
+    t.string "score_secondary_title", default: "Secondary Score", null: false
     t.string "primary_sort_order_cd", default: "ascending", null: false
     t.string "secondary_sort_order_cd", default: "not_used", null: false
     t.index ["challenge_id"], name: "index_challenge_rounds_on_challenge_id"
@@ -314,8 +314,8 @@ ActiveRecord::Schema.define(version: 2020_02_10_143323) do
 
   create_table "challenge_rules", force: :cascade do |t|
     t.bigint "challenge_id"
-    t.text "terms"
-    t.text "terms_markdown"
+    t.text "terms", default: "<h2> Placeholder Content : Please update this by going into Edit Challenge > Rules > Set Challenge Rules </h2> "
+    t.text "terms_markdown", default: "## Placeholder Content : Please update this by going into Edit Challenge > Rules > Set Challenge Rules "
     t.text "instructions"
     t.text "instructions_markdown"
     t.boolean "has_additional_checkbox", default: false
@@ -341,17 +341,17 @@ ActiveRecord::Schema.define(version: 2020_02_10_143323) do
     t.integer "page_views", default: 0
     t.integer "participant_count", default: 0
     t.integer "submissions_count", default: 0
-    t.string "score_title"
-    t.string "score_secondary_title"
+    t.string "score_title", default: "Score"
+    t.string "score_secondary_title", default: "Secondary Score"
     t.string "slug"
-    t.string "submission_license"
+    t.string "submission_license", default: "Please upload your submissions and include a detailed description of the methodology, techniques and insights leveraged with this submission. After the end of the challenge, these comments will be made public, and the submitted code and models will be freely available to other AIcrowd participants. All submitted content will be licensed under Creative Commons (CC)."
     t.boolean "api_required", default: false
     t.boolean "media_on_leaderboard", default: false
     t.string "challenge_client_name"
     t.boolean "online_grading", default: true
     t.integer "vote_count", default: 0
-    t.text "description_markdown"
-    t.text "description"
+    t.text "description_markdown", default: "## Placeholder Content : Please update this by going into Edit Challenge > Overview > Description "
+    t.text "description", default: "<h2> Placeholder Content : Please update this by going into Edit Challenge > Overview > Description </h2> "
     t.text "evaluation_markdown"
     t.text "evaluation"
     t.text "rules_markdown"
@@ -732,6 +732,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_143323) do
     t.integer "participation_terms_accepted_version"
     t.boolean "agreed_to_terms_of_use_and_privacy", default: true
     t.boolean "agreed_to_marketing", default: true
+    t.integer "submissions_count", default: 0
     t.index ["confirmation_token"], name: "index_participants_on_confirmation_token", unique: true
     t.index ["email"], name: "index_participants_on_email", unique: true
     t.index ["organizer_id"], name: "index_participants_on_organizer_id"
