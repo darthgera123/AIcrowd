@@ -1,7 +1,7 @@
 class ChallengesController < ApplicationController
   before_action :authenticate_participant!, except: [:show, :index]
   before_action :terminate_challenge, only: [:show, :index]
-  before_action :set_challenge, only: [:show, :edit, :update, :destroy, :clef_task, :remove_image]
+  before_action :set_challenge, only: [:show, :edit, :update, :destroy, :clef_task, :remove_image, :export]
   before_action :set_vote, only: [:show, :clef_task]
   before_action :set_follow, only: [:show, :clef_task]
   after_action :verify_authorized, except: [:index, :show]
@@ -104,6 +104,15 @@ class ChallengesController < ApplicationController
     respond_to do |format|
       format.js { render :remove_image }
     end
+  end
+
+  def export
+    challenge_associations = Challenge.reflect_on_all_associations.map(&:name)
+    challenge_json         = @challenge.to_json(include: challenge_associations)
+
+    send_data challenge_json,
+              type:     'application/json',
+              filename: "#{@challenge.challenge.to_s.parameterize.underscore}_export.json"
   end
 
   private

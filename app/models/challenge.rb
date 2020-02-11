@@ -40,8 +40,6 @@ class Challenge < ApplicationRecord
            class_name: 'ParticipantChallengeCount'
   has_many :challenge_registrations,
            class_name: 'ChallengeRegistration'
-  has_many :challenge_organizer_participants,
-           class_name: 'ChallengeOrganizerParticipant'
 
   has_many :votes, as: :votable
   has_many :follows, as: :followable
