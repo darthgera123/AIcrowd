@@ -103,7 +103,7 @@ Paloma.controller('Challenges', {
       let update_table_of_contents = function (headings) {
         let toc = $("#table-of-contents");
 
-        $.each(headings, (index, heading) => {
+        $.each(headings, function(index, heading) {
           // JQuery Object from DOM object
           heading = $(heading);
           let heading_content = heading.text();
